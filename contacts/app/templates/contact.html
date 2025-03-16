@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %} Welcome to Address book Flask App {% endblock %}
+
+{% block content %}
+<div name="banner_div">
+    <h1>Address Book</h1>
+    <p>
+        This is the demo application for the learning the Flask framework
+       
+    </p>
+</div>
+<div name=main_div>
+<h1>{{ contact.fields.first_name }} {{ contact.fields.last_name }} </h1>
+
+Title: {{ contact.fields.title }} <br>
+Firstname: {{ contact.fields.first_name }} <br>
+Surame: {{ contact.fields.last_name }} <br>
+Phone: {{ contact.fields.phone }} <br>
+Email: {{ contact.fields.email }} <br>
+Address1: {{ contact.fields.address1 }} <br>
+Address2: {{ contact.fields.address2 }} <br>
+Address3: {{ contact.fields.address3 }} <br>
+<p>
+    <a href="{{ url_for('home') }}">
+        Home Page
+    </a>
+</p>
+<p>
+    <button>
+    {% if index < max_index %}
+        <a href="{{ url_for('contact_view', index=index + 1) }}">
+            Next Contact
+        </a>
+    {% else %}
+        <a href="{{ url_for('contact_view', index=0 ) }}">
+            Start Over
+        </a>           
+    {% endif %}
+    </button>
+</p>
+<a href="{{ url_for('remove_contact', index=index) }}"> Remove this Contact </a>
+</div>
+{% endblock %}
