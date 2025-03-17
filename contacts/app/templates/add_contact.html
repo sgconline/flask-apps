@@ -3,16 +3,11 @@
 {% block title %} Welcome to Address book Flask App {% endblock %}
 
 {% block content %}
-<div name="banner_div">
-    <h1>Address Book</h1>
-    <p>
-        This is the demo application for the learning the Flask framework
-       
-    </p>
+<div id="side_div" class="side_div">
+
 </div>
-<div name=body_div>
-    <body> 
-      <h1> Add a new contact</h1>
+<div id="content_div" class="content_div">
+    <h1> Add a new contact</h1>
         <form method="post">
             <p>
                 Title: <input type="text" name="title"><br>
@@ -29,7 +24,6 @@
                 Country: <input type="text" name="country"><br>
             </p>
             <button type="submit">Create</button>
-        </form>
-    </body>   
+        </form> 
    </div>
 {% endblock %}

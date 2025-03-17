@@ -4,6 +4,46 @@ body {
     background-color: floralwhite;
 }
 
-side_div {
+h1 {
+    color: navy;
     
+  }
+h2 {
+    color: navy;
+    
+}
+p {
+    text-align: left;
+    color: red;
+    
+  } 
+
+.main_div {
+    border: 1px outset darkblue;
+    text-align: center;
+    
+    background-color: lightblue;
+    width: 70%
+}
+.banner_div {
+    border: 1px outset darkblue;
+    text-align: left;
+    
+    background-color: lightblue;
+    width: 100%
+}
+.content_div {
+    border: 1px outset darkblue;
+    text-align: left;
+    float: right
+    
+    background-color: lightblue;
+    width: 300px
+}
+.side_div {
+    border: 1px outset darkblue;
+    text-align: left;
+    
+    background-color: lightblue;
+    width: 300px
 }

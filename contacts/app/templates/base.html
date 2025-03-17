@@ -5,9 +5,21 @@
     <title>{% block title %}{% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
-  <div name="main_div">
-    {% block content %}
+  <body>
+    <div id="main_div" class="main_div">
+      <div class="banner_div">
+        <h1>Address Book</h1>
+        <p>
+          This is the demo application for the learning the Flask framework
+         
+        </p>
+      </div>
+      {% block content %}
   
-    {% endblock %}  
-  </div>
+      {% endblock %}
+      <div id="footer_div" class="foteer_div">
+    
+      </div>
+    </div>  
+  </body>
 </html>
