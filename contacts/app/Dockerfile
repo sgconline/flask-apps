@@ -2,7 +2,7 @@ FROM python:3.11-slim
 RUN apt-get update && apt-get install nginx -y
 
 ENV APP_HOME="/opt/contacts" 
-ENV VENV_LOC="${VENV_LOC}" 
+ENV VENV_LOC="/opt/venv" 
 
 COPY src/nginx/default /etc/nginx/sites-available/default
 #COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
