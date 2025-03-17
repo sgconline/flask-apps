@@ -11,17 +11,21 @@
     </p>
   </div>
   <div name="side_div">
+    <body>
     <h2>Contacts</h2>
     <p>
+      <a href="{{ url_for('add_contact') }}"> Add Contact</a>
       <ul>
         {% for contact in contacts %}
           <li>
             <a href="{{ url_for('contact_view', index=loop.index0) }}">
-              {{ contact.fields.first_name }} - {{ contact.fields.last_name }} 
+              {{ contact.pk  }} - {{ contact.fields["first_name"] }} {{ contact.fields["last_name"] }} 
+            
             </a>
           </li>
         {% endfor %}
       </ul>
     </p>
+    </body>
   </div>
 {% endblock %}

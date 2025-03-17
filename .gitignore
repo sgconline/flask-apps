@@ -1,5 +1,6 @@
 # .gitignore
 # Byte-compiled / optimized / DLL files
+contacts/app/__pycache__/
 __pycache__/
 *.py[cod]
 *$py.class

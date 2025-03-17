@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %} Welcome to Address book Flask App {% endblock %}
+
+{% block content %}
+<div name="banner_div">
+    <h1>Address Book</h1>
+    <p>
+        This is the demo application for the learning the Flask framework
+       
+    </p>
+</div>
+<div name=body_div>
+    <body> 
+      <h1> Add a new contact</h1>
+        <form method="post">
+            <p>
+                Title: <input type="text" name="title"><br>
+                Firstname: <input type="text" name="firstname"><br>
+                Surname: <input type="text" name="surname"><br>
+                Email: <input type="text" name="email"><br>
+                Telephone: <input type="text" name="telephone"><br>
+                Address1: <input type="text" name="address1"><br>
+                Address2: <input type="text" name="address2"><br>
+                Address3: <input type="text" name="address3"><br>
+                City: <input type="text" name="city"><br>
+                Zip: <input type="text" name="zip"><br>
+                State: <input type="text" name="state"><br>
+                Country: <input type="text" name="country"><br>
+            </p>
+            <button type="submit">Create</button>
+        </form>
+    </body>   
+   </div>
+{% endblock %}
