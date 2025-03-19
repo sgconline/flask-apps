@@ -39,7 +39,10 @@ a:active {
 #content_div p {
      color: brown;
 }
+#content_div label{
+  padding-right: 25px;
 
+}
 #side_div h1 {
     color: brown;
 }
