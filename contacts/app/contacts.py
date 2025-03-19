@@ -15,7 +15,7 @@ def home():
 def contact_view(index):
     try:
         contact = db[index]
-        return render_template("contact.html", contact=contact, index=index, max_index=len(db)-1)
+        return render_template("contact.html", contacts=db, contact=contact, index=index, max_index=len(db)-1)
     except IndexError:
         abort(404)
 
@@ -60,4 +60,4 @@ def add_contact():
       save_db()
       return redirect(url_for("contact_view", index=len(db)-1))
    else:
-      return render_template("add_contact.html")
+      return render_template("add_contact.html",contacts=db)

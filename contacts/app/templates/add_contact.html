@@ -3,27 +3,40 @@
 {% block title %} Welcome to Address book Flask App {% endblock %}
 
 {% block content %}
-<div id="side_div" class="side_div">
 
-</div>
 <div id="content_div" class="content_div">
     <h1> Add a new contact</h1>
-        <form method="post">
-            <p>
-                Title: <input type="text" name="title"><br>
-                Firstname: <input type="text" name="firstname"><br>
-                Surname: <input type="text" name="surname"><br>
-                Email: <input type="text" name="email"><br>
-                Telephone: <input type="text" name="telephone"><br>
-                Address1: <input type="text" name="address1"><br>
-                Address2: <input type="text" name="address2"><br>
-                Address3: <input type="text" name="address3"><br>
-                City: <input type="text" name="city"><br>
-                Zip: <input type="text" name="zip"><br>
-                State: <input type="text" name="state"><br>
-                Country: <input type="text" name="country"><br>
-            </p>
-            <button type="submit">Create</button>
-        </form> 
-   </div>
+    <form method="post">
+        <p>
+            <p><label for="title"> Title: </label><br><input type="text" name="title"></p>
+            <p><label for="firstname"> Firstname: </label><br><input type="text" name="firstname"><br>
+            <p><label for="surname"> Surname:</label><br><input type="text" name="surname"><br>
+            <p><label for="email"> Email:</label><br><input type="text" name="email"><br>
+            <p><label for="telephone"> Telephone:</label><br><input type="text" name="telephone"><br>
+            <p><label for="address1"> Address1:</label><br><input type="text" name="address1"><br>
+            <p><label for="address2"> Address2:</label><br><input type="text" name="address2"><br>
+            <p><label for="address3"> Address3:</label><br><input type="text" name="address3"><br>
+            <p><label for="city"> City:</label><br><input type="text" name="city"><br>
+            <p><label for="zip"> Zip:</label><br><input type="text" name="zip"><br>
+            <p><label for="state"> State:</label><br><input type="text" name="state"><br>
+            <p><label for="country"> Country:</label><br><input type="text" name="country"><br>
+        </p>
+        <button type="submit">Create</button>
+    </form> 
+ </div>
+ <div id="side_div" class="side_div">
+    <h2>View Contacts</h2>
+     <p>
+        <ul>
+         {% for contact in contacts %}
+           <li>
+             <a href="{{ url_for('contact_view', index=loop.index0) }}">
+               {{ contact.fields["first_name"] }} {{ contact.fields["last_name"] }} 
+             
+             </a>
+           </li>
+         {% endfor %}
+       </ul>
+     </p>
+</div>
 {% endblock %}

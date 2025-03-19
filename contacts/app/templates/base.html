@@ -6,20 +6,16 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
   <body>
-    <div id="main_div" class="main_div">
-      <div class="banner_div">
-        <h1>Address Book</h1>
-        <p>
-          This is the demo application for the learning the Flask framework
-         
-        </p>
+    <div id="main_div" name="main_div">
+      <div id="banner_div" class="banner_div">
+        <a href="{{ url_for('home') }}"> <h1>Address Book</h1></a><em>This is the demo application for the learning the Flask framework</em>
       </div>
       {% block content %}
   
       {% endblock %}
-      <div id="footer_div" class="foteer_div">
-    
+      <div id="footer_div" class="footer_div">
+       CopyRight Blar Blar Blar 2025
       </div>
-    </div>  
+    </div>
   </body>
 </html>

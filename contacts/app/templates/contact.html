@@ -4,14 +4,13 @@
 
 {% block content %}
 <div id="side_div" class="side_div">
-    <h2>Contacts</h2>
+    <h2>View Contacts</h2>
      <p>
-       <a href="{{ url_for('add_contact') }}"> Add Contact</a>
-       <ul>
+        <ul>
          {% for contact in contacts %}
            <li>
              <a href="{{ url_for('contact_view', index=loop.index0) }}">
-               {{ contact.pk  }} - {{ contact.fields["first_name"] }} {{ contact.fields["last_name"] }} 
+               {{ contact.fields["first_name"] }} {{ contact.fields["last_name"] }} 
              
              </a>
            </li>
@@ -31,11 +30,6 @@
     Address2: {{ contact.fields.address2 }} <br>
     Address3: {{ contact.fields.address3 }} <br>
     <p>
-        <a href="{{ url_for('home') }}">
-            Home Page
-        </a>
-    </p>
-    <p>
         <button>
         {% if index < max_index %}
             <a href="{{ url_for('contact_view', index=index + 1) }}">
@@ -48,6 +42,8 @@
         {% endif %}
         </button>
     </p>
-    <a href="{{ url_for('remove_contact', index=index) }}"> Remove this Contact </a>
+    <button>
+       <a href="{{ url_for('remove_contact', index=index) }}"> Remove this Contact </a>
+    </button>
  </div>
 {% endblock %}
