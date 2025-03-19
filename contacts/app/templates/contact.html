@@ -31,6 +31,11 @@
     Address3: {{ contact.fields.address3 }} <br>
     <p>
         <button>
+          <a href="{{ url_for('contact_view', index=index - 1) }}">
+            Previous Contact
+        </a>
+        </button>
+        <button>
         {% if index < max_index %}
             <a href="{{ url_for('contact_view', index=index + 1) }}">
                 Next Contact

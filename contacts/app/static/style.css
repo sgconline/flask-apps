@@ -3,13 +3,7 @@ body {
     color: brown;
     background-color: rgb(241, 237, 235);
 }
-h1 {
-    color: beige;
-}
-h2 {
-    color: beige;
 
-}
 a:link {
     color: brown;
 }
@@ -23,51 +17,62 @@ a:hover {
 a:active {
     color: black
 }
+
 #banner_div h1 {
     color: beige;
     
 }
 
+#content_div {
+    padding: 20px;
+    float: left;
+    width: 50%;
+}
+
 #content_div h1 {
     color: brown;
 }
+
 #content_div h2 {
-    color: brown; 
+    color: brown;
 }
+#content_div p {
+     color: brown;
+}
+
 #side_div h1 {
     color: brown;
 }
 #side_div h2 {
     color: brown; 
 }
+
 p {
     text-align: left;
     color: brown;
 } 
+
 #main_div {
     width: 70%;
     margin: 0 auto; 
     background: beige; 
-    color:brown;
-    
+
 }
+
 #banner_div {
     padding: 20px;
     height: 120px;
     background: brown; 
     color: beige; 
 }
+
 #side_div {
 float: right;
 width: 35%;
 background-color: beige;
 }
-#content_div {
 
-    padding: 20px;
-    float: left;
-    width: 4%0%;
-}
+
 #footer_div{
     clear: both;
     padding: 20px;

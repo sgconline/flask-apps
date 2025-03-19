@@ -3,22 +3,19 @@
 {% block title %} Welcome to Address book Flask App {% endblock %}
 
 {% block content %}
-<div name="banner_div">
-    <h1>Address Book</h1>
-    <p>
-        This is the demo application for the learning the Flask framework
-       
-    </p>
+<div id="side_div" class="side_div">
 </div>
-<div name=main_div>
-    <body>
-        <h2>Remove Contact</h2>
-        <h3>{{ contact.fields.first_name }} {{ contact.fields.last_name }}</h3> 
-        <h3> Are you Sure</h3>
-        <form method="post">
-            <button type="submit">Yes</button>
-            <a href="{{ url_for('home') }}"> No </a>
-        </form>
-    </body>
+<div id="content_div" class="content_div">
+   <P>
+    <h2>Remove Contact</h2>
+    <h3>{{ contact.fields.first_name }} {{ contact.fields.last_name }}</h3> 
+    <h4>Are you Sure</h4>
+    <form method="post">
+      <button type="submit">Yes</button>
+      <button><a href="{{ url_for('home') }}"> No </a></button>
+    </form>
+  </P> 
+  <br>
 </div>
+
 {% endblock %}
