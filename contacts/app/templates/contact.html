@@ -29,14 +29,23 @@
     Address1: {{ contact.fields.address1 }} <br>
     Address2: {{ contact.fields.address2 }} <br>
     Address3: {{ contact.fields.address3 }} <br>
-    <p>
-        <button>
-          <a href="{{ url_for('contact_view', index=index - 1) }}">
-            Previous Contact
-        </a>
+    <p> 
+      <button>
+        {% if index > 0 %}
+        
+            <a href="{{ url_for('contact_view', index=index - 1) }}">
+              Previous Contact
+            </a>
+          
+          {% else %}
+          <a href="{{ url_for('contact_view', index=max_index ) }}">
+              Skip to End
+          </a>   
+        {% endif %}
         </button>
         <button>
-        {% if index < max_index %}
+        
+          {% if index < max_index %}
             <a href="{{ url_for('contact_view', index=index + 1) }}">
                 Next Contact
             </a>
