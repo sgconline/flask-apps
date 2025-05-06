@@ -1,0 +1,27 @@
+services:
+  contacts-app:
+    image: sgconline/contacts-app:v1.1
+    networks:
+     - front-end
+    depends_on: 
+      - contacts-mdb
+
+  contacts-web:
+    image: sgconline/contacts-web:v1.1
+    ports:
+      - 80:80
+    networks:
+     - front-end
+    depends_on: 
+      - contacts-app
+
+  contacts-mdb:
+    image: sgconline/contacts-mdb:v0.1
+    ports:
+      - 27017:27017
+    networks:
+     - back-end
+
+networks:
+  front-end:
+  back-end:
