@@ -9,9 +9,8 @@
         <ul>
          {% for contact in contacts %}
            <li>
-             <a href="{{ url_for('contact_view', index=loop.index0) }}">
-               {{ contact.fields["first_name"] }} {{ contact.fields["last_name"] }} 
-             
+             <a href="{{ url_for('contact_view', contact_id=contact['_id']) }}">
+              {{ contact["first_name"] }} {{ contact["last_name"] }}
              </a>
            </li>
          {% endfor %}
@@ -19,45 +18,51 @@
      </p>
    </div>
 <div id="content_div" class="content_div">
-    <h1>{{ contact.fields.first_name }} {{ contact.fields.last_name }} </h1>
-
-    Title: {{ contact.fields.title }} <br>
-    Firstname: {{ contact.fields.first_name }} <br>
-    Surame: {{ contact.fields.last_name }} <br>
-    Phone: {{ contact.fields.phone }} <br>
-    Email: {{ contact.fields.email }} <br>
-    Address1: {{ contact.fields.address1 }} <br>
-    Address2: {{ contact.fields.address2 }} <br>
-    Address3: {{ contact.fields.address3 }} <br>
-    <p> 
+    <h1>{{ contact["first_name"] }} {{ contact["last_name"] }}</h1>
+    <p>
+      <table>
+          <tr><td><label for="title"> Title: </label></td><td>{{ contact['title'] if contact else '' }}</td></tr>
+          <tr><td><label for="firstname"> Firstname: </label></td><td>{{ contact['first_name'] if contact else '' }}</td></tr>
+          <tr><td><label for="surname"> Surname:</label></td><td>{{ contact['last_name'] if contact else '' }}</td></tr>
+          <tr><td><label for="email"> Email:</label></td><td>{{ contact['email'] if contact else '' }}</td></tr>
+          <tr><td><label for="telephone"> Telephone:</label></td><td>{{ contact['phone'] if contact else '' }}</td></tr>
+          <tr><td><label for="address1"> Address1:</label></td><td>{{ contact['address1'] if contact else '' }}</td></tr>
+          <tr><td><label for="address2"> Address2:</label></td><td>{{ contact['address2'] if contact else '' }}</td></tr>
+          <tr><td><label for="address3"> Address3:</label></td><td>{{ contact['address3'] if contact else '' }}</td></tr>
+          <tr><td><label for="city"> City:</label></td><td>{{ contact['city'] if contact else '' }}</td></tr>
+          <tr><td><label for="zip"> Zip:</label></td><td>{{ contact['zip'] if contact else '' }}</td></tr>
+          <tr><td><label for="state"> State:</label></td><td>{{ contact['state'] if contact else '' }}</td></tr>
+          <tr><td><label for="country"> Country:</label></td><td>{{ contact['country'] if contact else '' }}</td></tr>
+      </table>
+  </p>
       <button>
         {% if index > 0 %}
-        
-            <a href="{{ url_for('contact_view', index=index - 1) }}">
+            <a href="{{ url_for('contact_view', contact_id=ids[index - 1]) }}">
               Previous Contact
             </a>
-          
-          {% else %}
-          <a href="{{ url_for('contact_view', index=max_index ) }}">
+        {% else %}
+          <a href="{{ url_for('contact_view', contact_id=ids[max_index]) }}">
               Skip to End
           </a>   
         {% endif %}
         </button>
         <button>
-        
           {% if index < max_index %}
-            <a href="{{ url_for('contact_view', index=index + 1) }}">
+            <a href="{{ url_for('contact_view', contact_id=ids[index + 1]) }}">
                 Next Contact
             </a>
         {% else %}
-            <a href="{{ url_for('contact_view', index=0 ) }}">
+            <a href="{{ url_for('contact_view', contact_id=ids[0]) }}">
                 Start Over
             </a>           
         {% endif %}
         </button>
     </p>
     <button>
-       <a href="{{ url_for('remove_contact', index=index) }}"> Remove this Contact </a>
+       <a href="{{ url_for('remove_contact_route', contact_id=contact['_id']) }}"> Remove this Contact </a>
+    </button>
+    <button>
+       <a href="{{ url_for('edit_contact_route', contact_id=contact['_id']) }}"> Edit Contact </a>
     </button>
  </div>
 {% endblock %}

@@ -23,16 +23,19 @@
 <div id="side_div" class="side_div">
    <h2>View Contacts</h2>
     <p>
-      <a href="{{ url_for('add_contact') }}"> Add Contact</a>
+      <a href="{{ url_for('add_contact_route') }}"> Add Contact</a>
       <ul>
-        {% for contact in contacts %}
-          <li>
-            <a href="{{ url_for('contact_view', index=loop.index0) }}">
-              {{ contact.fields["first_name"] }} {{ contact.fields["last_name"] }} 
-            
-            </a>
-          </li>
-        {% endfor %}
+        {% if contacts %}
+          {% for contact in contacts %}
+            <li>
+              <a href="{{ url_for('contact_view', contact_id=contact['_id']) }}">
+               {{ contact["first_name"] }} {{ contact["last_name"] }} 
+              </a>
+            </li>
+          {% endfor %}
+        {% else %}
+          <li>No contacts found.</li>
+        {% endif %}
       </ul>
     </p>
   </div>

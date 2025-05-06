@@ -3,10 +3,7 @@
 {% block title %} Welcome to Address book Flask App {% endblock %}
 
 {% block content %}
-
-<div id="content_div" class="content_div">
-    <h1> Add a new contact</h1>
-    <form method="post">
+   <form method="post">
         <p>
             <table>
                 <tr><td><label for="title"> Title: </label></td><td><input type="text" name="title" value="{{ contact['title'] if contact else '' }}"></td></tr>
@@ -23,21 +20,6 @@
                 <tr><td><label for="country"> Country:</label></td><td><input type="text" name="country" value="{{ contact['country'] if contact else '' }}"></td></tr>
             </table>
         </p>
-        <button type="submit">Create</button>
+        <button type="submit">Update Contact</button>
     </form> 
- </div>
- <div id="side_div" class="side_div">
-    <h2>View Contacts</h2>
-     <p>
-        <ul>
-         {% for contact in contacts %}
-           <li>
-             <a href="{{ url_for('contact_view', contact_id=contact['_id']) }}">
-               {{ contact["first_name"] }} {{ contact["last_name"] }} 
-             </a>
-           </li>
-         {% endfor %}
-       </ul>
-     </p>
-</div>
 {% endblock %}

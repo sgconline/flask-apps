@@ -1,23 +1,55 @@
 """
 model.py
 --------
-Implements the model for our website by simulating a database.
-
-Note: although this is nice as a simple example, don't do this in a real-world
-production setting. Having a global object for application data is asking for
-trouble. Instead, use a real database layer, like
-https://flask-sqlalchemy.palletsprojects.com/.
+Connection details to mongodb backup database
 """
 
-import json
+import os
+from pymongo import MongoClient
+from bson.objectid import ObjectId
+from flask import abort
 
+# MongoDB connection setup
+mongo_uri = os.getenv("MONGO_URI", "mongodb://localhost:27017")
+database_name = os.getenv("DATABASE_NAME", "contacts_db")
+try:
+    client = MongoClient(mongo_uri, serverSelectionTimeoutMS=5000)
+    # Force connection on a request as the
+    # connect=True parameter of MongoClient seems
+    # to be useless here
+    client.server_info()
+except Exception as e:
+    print(f"Error connecting to MongoDB: {e}")
+    raise
 
-def load_db():
-    with open("db/addressbook_db.json") as f:
-        return json.load(f)
+db = client[database_name]
+contacts_collection = db["contacts"]
 
-def save_db():
-    with open("db/addressbook_db.json", 'w') as f:
-        return json.dump(db, f)
-    
-db = load_db()
+def get_all_contacts():
+    contacts = list(contacts_collection.find())
+    for contact in contacts:
+        contact["_id"] = str(contact["_id"])
+    return contacts
+
+def get_contact(contact_id):
+    contact = contacts_collection.find_one({"_id": ObjectId(contact_id)})
+    if contact:
+        contact["_id"] = str(contact["_id"])
+    return contact
+
+def add_contact(data):
+    result = contacts_collection.insert_one(data)
+    return str(result.inserted_id)
+
+def update_contact(contact_id, data):
+    result = contacts_collection.update_one(
+        {"_id": ObjectId(contact_id)}, {"$set": data}
+    )
+    return result.matched_count > 0
+
+def delete_contact(contact_id):
+    try:
+        result = contacts_collection.delete_one({"_id": ObjectId(contact_id)})
+    except Exception as e:
+        print(f"Error deleting contact: {e}")
+        return False
