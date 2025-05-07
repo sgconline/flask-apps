@@ -3,14 +3,32 @@ model.py
 --------
 Connection details to mongodb backup database
 """
-
 import os
 from pymongo import MongoClient
 from bson.objectid import ObjectId
 from flask import abort
+from dotenv import load_dotenv
+load_dotenv()
 
+# Retrieve MongoDB credentials from environment variables or use defaults
+mdb_admin = os.getenv("MDB_USER", "mdbadmin")
+mdb_pword = os.getenv("MDB_PWORD", "mdbadmin")
+mdb_host  = os.getenv("MDB_HOST", "contacts-mdb")
+mdb_port  = os.getenv("MDB_PORT", "27017")
+mdb_name = os.getenv("MDB_NAME", "contacts_db")
+mdb_connection_str = os.getenv("MDB_CONNECTION_STR", "mongodb://" + mdb_admin + ":" + mdb_pword + "@" + mdb_host + ":" + mdb_port)
+
+# MongoDB connection setup with dynamic user and password
+mongo_uri = os.getenv("MONGO_URI", "mongodb://mdbadmin:mdbadmin@contacts-mdb:27017")
+database_name = os.getenv("DATABASE_NAME", "contacts_db")
+
+#mongo_uri = os.getenv(
+#    "MONGO_URI",
+#    f"mongodb://{mdb_admin}:{mdb_pword}@{mdb_host}:{mdb_port}/?authSource={mdb_name}"
+#)
 # MongoDB connection setup
-mongo_uri = os.getenv("MONGO_URI", "mongodb://localhost:27017")
+#mongo_uri = os.getenv("MONGO_URI", "mongodb://" + mdb_connection_str)
+
 database_name = os.getenv("DATABASE_NAME", "contacts_db")
 try:
     client = MongoClient(mongo_uri, serverSelectionTimeoutMS=5000)

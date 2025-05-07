@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, abort, redirect, url_for
 from model import get_all_contacts, get_contact, add_contact, delete_contact
 
 app = Flask(__name__)
+app.debug = True
 
 @app.route("/")
 def home():

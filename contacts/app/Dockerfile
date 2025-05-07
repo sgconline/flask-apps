@@ -5,12 +5,12 @@ ENV VENV_LOC="/opt/venv"
 
 WORKDIR ${APP_HOME}
 COPY requirements.txt ${APP_HOME}/requirements.txt
-COPY src/config ${APP_HOME}/
+COPY bin/entrypoint.sh ${APP_HOME}/
 COPY contacts.py ${APP_HOME}/contacts.py
 COPY model.py ${APP_HOME}/model.py
 COPY templates/ ${APP_HOME}/templates
 COPY static/ ${APP_HOME}/static
-COPY db/ ${APP_HOME}/db
+# COPY db/ ${APP_HOME}/db
 
 RUN python -m venv ${VENV_LOC} && \
 ${VENV_LOC}/bin/python -m pip install pip --upgrade && \
