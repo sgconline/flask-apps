@@ -1,14 +1,15 @@
 from flask import Flask, render_template, request, abort, redirect, url_for
 from model import get_all_contacts, get_contact, add_contact, delete_contact
-
+import socket
 app = Flask(__name__)
-app.debug = True
+# app.debug = True
 
 @app.route("/")
 def home():
     contacts = get_all_contacts()
     return render_template("index.html", contacts=contacts)
 
+# View a single contact's details, with navigation
 @app.route("/contact/<contact_id>")
 def contact_view(contact_id):
     contacts = get_all_contacts()
@@ -24,6 +25,7 @@ def contact_view(contact_id):
     max_index = len(contacts) - 1
     return render_template("contact.html", contacts=contacts, contact=contact, index=index, max_index=max_index, ids=ids, contact_id=contact_id)
 
+# Remove a contact (confirmation page and POST to delete)
 @app.route('/remove_contact/<contact_id>', methods=["GET", "POST"])
 def remove_contact_route(contact_id):
     contact = get_contact(contact_id)
@@ -36,6 +38,7 @@ def remove_contact_route(contact_id):
     else:
         return render_template("remove_contact.html", contact=contact, contacts=contacts)
 
+# Add a new contact (form and POST handler)
 @app.route("/add_contact", methods=['POST','GET'])
 def add_contact_route():
     contacts = get_all_contacts()
@@ -59,7 +62,7 @@ def add_contact_route():
         return redirect(url_for("contact_view", contact_id=new_id))
     else:
         return render_template("add_contact.html", contacts=contacts)
-
+# Edit an existing contact (form and POST handler)
 @app.route("/edit_contact/<contact_id>", methods=["GET", "POST"])
 def edit_contact_route(contact_id):
     contact = get_contact(contact_id)
@@ -87,3 +90,9 @@ def edit_contact_route(contact_id):
         return redirect(url_for("contact_view", contact_id=contact_id))
     else:
         return render_template("edit_contact.html", contact=contact, contacts=contacts)
+
+# Injects the server's hostname into all templates
+@app.context_processor
+def inject_hostname():
+    hostname = socket.gethostname()
+    return {'hostname': hostname}

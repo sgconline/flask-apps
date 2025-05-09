@@ -8,6 +8,7 @@ COPY requirements.txt ${APP_HOME}/requirements.txt
 COPY bin/entrypoint.sh ${APP_HOME}/
 COPY contacts.py ${APP_HOME}/contacts.py
 COPY model.py ${APP_HOME}/model.py
+COPY .env ${APP_HOME}/.env
 COPY templates/ ${APP_HOME}/templates
 COPY static/ ${APP_HOME}/static
 # COPY db/ ${APP_HOME}/db

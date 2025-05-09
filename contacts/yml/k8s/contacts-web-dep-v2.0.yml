@@ -4,23 +4,25 @@ metadata:
   name: contacts-web
   labels:
     app: contacts-web
-    tier: front-end
+    component: web
 
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
-      tier: front-end
+      app: contacts-web
+      component: web
   template:
     metadata:
       name: contacts-web
       labels:
-        tier: front-end
+        app: contacts-web
+        component: web
 
     spec:
       containers:
       - name: contacts-web
-        image: sgconline/contacts-web:v1.1
+        image: sgconline/contacts-web:v2.0
 ---
 apiVersion: v1
 kind: Service
@@ -29,7 +31,8 @@ metadata:
 spec:
   type: NodePort
   selector: 
-    tier: front-end
+    app: contacts-web
+    component: web
   ports:
   - protocol: TCP
     port: 80
