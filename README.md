@@ -37,3 +37,22 @@ The latest docker images of the application can be found at:
   * contacts-web - Nginx reverse proxy to contacts-app gunicon instance.
 
  ### Previous Versions
+ versions 
+*   0.1 - 0.9 Nginx, Flask & Gunicorn were all running within a single Docker image, reading from a json file. 
+*   1.0 - 1.7 Nginx was separated out into its own Dockerfile and subsequent image
+*   2.0 - 2.2 Major version update as application rewritten to store user details in a MongoDB from a Json file and Bug fixes.
+  
+ ### Leaning Goals
+* The learning goals which have been achieved are
+   * Write a very basic Python Flask app. Which is a address book application which can add, remove and edit users from a json file.
+   * Use Git & Github to version control the app. 
+   * Create branches to add functionality to the app and merge with the main branch.
+   * Upgrade application to use MongoDB using GitHub CoPilot 
+   * Run the application as a container using Docker and then Kubernetes (MiniKube) 
+      * Write a Dockerfile to image the three components of the application (web (nginx), app(Flask,Gunicorn), db(mongodb)) using the docker build command and upload to DockerHub. Add the created Dockerfile to the Git repo
+      * Write a a Docker compose file to run the full application ensuring successful port forward ingress and egress from VirtualBox NatNetwork. Add the compose.yml files to the Git Repo
+      * Write a K8s deployment file to run the full application creating the relevant Services to enable communication outside of the K8S Network and beyond the VirtualBox NatNetwork
+   * The applicatiton exposed the correct https port and mongodb port for connecting external MongoDB Compass administration tool
+   * Setup Nginx as a reverse http and tcp (stream) proxy on the MiniKube host to forward requests from out side of the NatNetwork, main my laptop which is the VirtualBox host
+      *    To serve the Contacts Web Application. PortForward -  VirtualBox Host NatNetwork (loopback) -> MiniKube Nginx -> K8s NodePort -> Nginx RP -> Gunicorn Flask App -> MongoDB
+      *    To administer the Contacts DB using MongoDB Compass. PortForward -  VirtualBox Host NatNetwork (loopback) -> MiniKube Nginx -> K8s NodePort -> MongoDB
