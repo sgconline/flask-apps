@@ -1,0 +1,35 @@
+pipeline:
+  identifier: Build_flask_apps_1747396366992
+  name: Build flask-apps
+  orgIdentifier: default
+  projectIdentifier: contacts
+  properties:
+    ci:
+      codebase:
+        build: <+input>
+        connectorRef: githubconnector
+        repoName: flask-apps
+  stages:
+    - stage:
+        identifier: build
+        name: build
+        spec:
+          caching:
+            enabled: true
+          cloneCodebase: true
+          execution:
+            steps:
+              - step:
+                  identifier: echo
+                  name: echo
+                  spec:
+                    command: echo hello world
+                  timeout: ""
+                  type: Run
+          platform:
+            arch: Amd64
+            os: Linux
+          runtime:
+            spec: {}
+            type: Docker
+        type: CI
