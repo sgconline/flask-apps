@@ -23,13 +23,35 @@ pipeline:
                   identifier: echo
                   name: echo
                   spec:
+                    connectorRef: dockerhubconnector
+                    image: nginx
+                    shell: Sh
                     command: echo hello world
                   timeout: ""
                   type: Run
-          platform:
-            arch: Amd64
-            os: Linux
-          runtime:
-            spec: {}
-            type: Docker
+              - step:
+                  type: GitClone
+                  name: Git Clone Contacts App
+                  identifier: Git_Clone_Contacts_App
+                  spec:
+                    connectorRef: githubconnector
+                    repoName: flask-apps/
+                    cloneDirectory: /harness/flask-apps
+                    runAsUser: "1000"
+                    build:
+                      type: branch
+                      spec:
+                        branch: master
+          infrastructure:
+            type: KubernetesDirect
+            spec:
+              connectorRef: k8sminikubeconnector
+              namespace: harness-k8s-build
+              automountServiceAccountToken: true
+              nodeSelector: {}
+              containerSecurityContext:
+                runAsNonRoot: true
+                runAsUser: "1000"
+              os: Linux
         type: CI
+        description: ""
