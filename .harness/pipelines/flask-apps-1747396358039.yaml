@@ -32,6 +32,15 @@ pipeline:
                       type: branch
                       spec:
                         branch: master
+              - step:
+                  type: Run
+                  name: Run_1
+                  identifier: Run_1
+                  spec:
+                    connectorRef: dockerhubconnector
+                    image: nginx
+                    shell: Sh
+                  description: Ls /harness/flask_apps
           infrastructure:
             type: KubernetesDirect
             spec:
