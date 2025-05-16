@@ -1,0 +1,14 @@
+inputSet:
+  name: Build_flask_apps_1747396366992-push-trigger-input-set
+  identifier: Build_flask_apps_1747396366992pushtriggerinputset
+  orgIdentifier: default
+  projectIdentifier: contacts
+  pipeline:
+    identifier: Build_flask_apps_1747396366992
+    properties:
+      ci:
+        codebase:
+          build:
+            type: branch
+            spec:
+              branch: <+trigger.branch>
