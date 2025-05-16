@@ -20,22 +20,12 @@ pipeline:
           execution:
             steps:
               - step:
-                  identifier: echo
-                  name: echo
-                  spec:
-                    connectorRef: dockerhubconnector
-                    image: nginx
-                    shell: Sh
-                    command: echo hello world
-                  timeout: ""
-                  type: Run
-              - step:
                   type: GitClone
                   name: Git Clone Contacts App
                   identifier: Git_Clone_Contacts_App
                   spec:
                     connectorRef: githubconnector
-                    repoName: flask-apps/
+                    repoName: flask-apps.git
                     cloneDirectory: /harness/flask-apps
                     runAsUser: "1000"
                     build:
