@@ -1,0 +1,14 @@
+inputSet:
+  name: Build_flask_apps_1747396366992-pr-trigger-input-set
+  identifier: Build_flask_apps_1747396366992prtriggerinputset
+  orgIdentifier: default
+  projectIdentifier: contacts
+  pipeline:
+    identifier: Build_flask_apps_1747396366992
+    properties:
+      ci:
+        codebase:
+          build:
+            type: PR
+            spec:
+              number: <+trigger.prNumber>
