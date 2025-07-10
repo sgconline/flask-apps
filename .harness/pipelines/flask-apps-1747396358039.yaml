@@ -1,0 +1,56 @@
+pipeline:
+  identifier: Build_flask_apps_1747396366992
+  name: Build flask-apps
+  orgIdentifier: default
+  projectIdentifier: contacts
+  properties:
+    ci:
+      codebase:
+        build: <+input>
+        connectorRef: githubconnector
+        repoName: flask-apps
+  stages:
+    - stage:
+        identifier: build
+        name: build
+        spec:
+          caching:
+            enabled: true
+          cloneCodebase: true
+          execution:
+            steps:
+              - step:
+                  type: GitClone
+                  name: Git Clone Contacts App
+                  identifier: Git_Clone_Contacts_App
+                  spec:
+                    connectorRef: githubconnector
+                    repoName: flask-apps.git
+                    cloneDirectory: /harness/flask-apps
+                    runAsUser: "1000"
+                    build:
+                      type: branch
+                      spec:
+                        branch: master
+              - step:
+                  type: Run
+                  name: Run_1
+                  identifier: Run_1
+                  spec:
+                    connectorRef: dockerhubconnector
+                    image: nginx
+                    shell: Sh
+                  description: Ls /harness/flask_apps
+          infrastructure:
+            type: KubernetesDirect
+            spec:
+              connectorRef: k8sminikubeconnector
+              namespace: harness-k8s-build
+              automountServiceAccountToken: true
+              nodeSelector: {}
+              containerSecurityContext:
+                runAsNonRoot: true
+                runAsUser: "1000"
+              os: Linux
+        type: CI
+        description: ""
