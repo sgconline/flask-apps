@@ -1,6 +1,6 @@
 FROM mongodb/mongodb-community-server:4.4.18-ubi8
 
-ENV APP_HOME="/data"
+ENV APP_HOME="/opt"
 
 WORKDIR ${APP_HOME}
 ENV MONGODB_INITDB_ROOT_USERNAME=mdbadmin

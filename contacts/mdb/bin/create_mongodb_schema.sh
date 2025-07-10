@@ -6,7 +6,7 @@ MDB_ADDR="localhost"
 MDB_PORT=27017
 # Compile connection string mongo mongodb://mdbadmin:mdbadmin@localhost
 MDB_CONN_STR="${MDB_CMD} ${MDB_CMD}db://${MDB_USER}:${MDB_PWD}@${MDB_ADDR}:${MDB_PORT}"
-MDB_JSON_DB="/data/src/contacts.json"
+MDB_JSON_DB="/opt/src/contacts.json"
 
 if which ${MDB_CMD}; then
 ${MDB_CONN_STR} <<EOF
