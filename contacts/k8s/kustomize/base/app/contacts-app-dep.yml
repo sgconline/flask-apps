@@ -1,0 +1,45 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: contacts-app
+  labels:
+    app: contacts-app
+    component: app
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: contacts-app
+      component: app
+  template:
+    metadata:
+      name: contacts-app
+      labels:
+        app: contacts-app
+        component: app
+
+    spec:
+      initContainers:
+      - name: wait-for-mongodb
+        image: busybox:latest
+        env:
+        - name: MONGODB_HOST
+          valueFrom: 
+            configMapKeyRef:
+              name: mongodb-schema-cm
+              key: MONGODB_HOST
+        command: 
+        - "/bin/sh"
+        args:
+        - "-c"
+        - >
+          until nc -z ${MONGODB_HOST} 27017;
+          do echo "$(date) - Waiting for MongoDB ${MONGODB_HOST}..."; sleep 2; done;
+
+
+      containers:
+      - name: contacts-app
+        image: sgconline/contacts-app:v2.0
+
