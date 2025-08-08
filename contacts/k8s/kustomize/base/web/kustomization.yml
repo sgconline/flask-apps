@@ -1,0 +1,11 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization 
+resources:
+- contacts-web-cm.yml
+- contacts-web-svc.yml
+- contacts-nginx.cm.yml
+- contacts-web-dep.yml
+
+images:
+  - name: sgconline/contacts-web
+    newTag: v2.2
