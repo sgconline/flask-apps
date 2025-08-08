@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -24,38 +23,3 @@ data:
     echo "${MONGODB_CONN_STR}/contacts_db --collection contacts --jsonArray --type json --file ${MONGODB_JSON_DB} --authenticationDatabase admin"
     # Import data from a JSON file
     ${MONGODB_CONN_STR}/contacts_db --collection contacts --jsonArray --type json --file ${MONGODB_JSON_DB} --authenticationDatabase admin
-||||||| 29d5549
-=======
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: mongodb-schema-cm
-data:
-  MONGODB_HOST: contacts-mdb
-  MONGODB_CMD: mongo
-  MONGODB_ADDR: localhost
-  MONGODB_PORT: "27017"
-
-  load-mdb-schema.sh: |
-    !/bin/bash
-    MONGODB_CMD=${MONGODB_CMD}
-    MONGODB_USER=${MONGODB_USER}
-    MONGODB_PWD=${MONGODB_PWD}
-    MONGODB_ADDR=${MONGODB_ADDR}
-    MONGODB_PORT=${MONGODB_PORT}
-    # Compile connection string mongo mongodb://mdbadmin:mdbadmin@localhost
-    MONGODB_CONN_STR="${MONGODB_CMD} ${MONGODB_CMD}db://${MONGODB_USER}:${MONGODB_PWD}@${MONGODB_ADDR}:${MONGODB_PORT}"
-    MONGODB_JSON_DB="/opt/src/contacts.json"
-    ${MONGODB_CONN_STR} <<EOF
-    use contacts_db
-    db.createCollection("contacts")
-    exit
-    EOF
-    MONGODB_IMP="${MONGODB_CMD}import"
-    # Compile connection string
-    # mongoimport mongodb://mdbadmin:mdbadmin@localhost:27017/contacts_db --collection contacts --jsonArray --type json --file contacts.json --authenticationDatabase admin
-    MONGODB_CONN_STR="${MONGODB_IMP} ${MONGODB_CMD}db://${MONGODB_USER}:${MONGODB_PWD}@${MONGODB_ADDR}:${MONGODB_PORT}"
-    echo "${MONGODB_CONN_STR}/contacts_db --collection contacts --jsonArray --type json --file ${MONGODB_JSON_DB} --authenticationDatabase admin"
-    # Import data from a JSON file
-    ${MONGODB_CONN_STR}/contacts_db --collection contacts --jsonArray --type json --file ${MONGODB_JSON_DB} --authenticationDatabase admin
->>>>>>> 99395f4e17262912b84c7f2c05f4f4d961595b4e
