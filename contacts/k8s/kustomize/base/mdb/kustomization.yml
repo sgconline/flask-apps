@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization 
 resources:
@@ -11,3 +12,20 @@ resources:
 images: 
   - name: sgconline/contacts-mdb
     newTag: v2.2 
+||||||| 29d5549
+=======
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization 
+resources:
+  - contacts-mdb-dep.yml
+  - contacts-mdb-svc.yml
+  - contacts-mdb-adm-svc.yml
+  - contacts-mdb-secrets.yml
+  - contacts-mdb-cm.yml
+
+
+images: 
+  - name: sgconline/contacts-mdb
+    newName: sgconline/mdb-novars 
+    newTag: v0.2 
+>>>>>>> 99395f4e17262912b84c7f2c05f4f4d961595b4e
