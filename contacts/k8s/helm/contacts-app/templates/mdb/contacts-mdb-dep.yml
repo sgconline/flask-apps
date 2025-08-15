@@ -1,0 +1,65 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: contacts-mdb
+  labels:
+    app: contacts-mdb
+    component: db
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: contacts-mdb
+      component: db
+  template:
+    metadata:
+      name: contacts-mdb
+      labels:
+        app: contacts-mdb
+        component: db
+
+    spec:
+      serviceAccount: contacts-app-sa
+      serviceAccountName: contacts-app-sa
+      volumes:
+        - name: mongodb-schema-sh
+          configMap:  
+            name: mongodb-schema-cm
+            defaultMode: 0777
+
+      containers:
+      - name: contacts-mdb
+        image: sgconline/contacts-mdb:v2.0
+        env:
+          - name: MONGODB_INITDB_ROOT_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: mongodb-user-secrets
+                key: username
+          - name: MONGODB_INITDB_ROOT_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: mongodb-user-secrets
+                key: password
+          - name: MONGODB_CMD
+            valueFrom:
+              configMapKeyRef:
+                name: mongodb-schema-cm
+                key: MONGODB_CMD
+          - name: MONGODB_ADDR
+            valueFrom:
+              configMapKeyRef:
+                name: mongodb-schema-cm
+                key: MONGODB_ADDR
+          - name: MONGODB_PORT
+            valueFrom:
+              configMapKeyRef:
+                name: mongodb-schema-cm
+                key: MONGODB_PORT
+        volumeMounts:
+         - name: mongodb-schema-sh
+           mountPath: "/docker-entrypoint-initdb.d/load-mdb-schema.sh"
+           subPath: load-mdb-schema.sh
+

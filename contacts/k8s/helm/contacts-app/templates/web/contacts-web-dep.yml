@@ -1,0 +1,65 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: contacts-web
+  labels:
+    app: contacts-web
+    component: web
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: contacts-web
+      component: web
+  template:
+    metadata:
+      name: contacts-web
+      labels:
+        app: contacts-web
+        component: web
+
+    spec:
+      serviceAccount: contacts-app-sa
+      serviceAccountName: contacts-app-sa
+      initContainers:
+      - name: wait-for-contacts-app
+        image: busybox:latest
+        env:
+        - name: CONTACTS_APP_HOST
+          valueFrom: 
+            configMapKeyRef: 
+              name: contacts-web-cm
+              key: CONTACTS_APP_HOST
+
+        - name: CONTACTS_APP_PORT
+          valueFrom: 
+            configMapKeyRef:
+              name: contacts-web-cm
+              key: CONTACTS_APP_PORT
+
+        command:
+        - "/bin/sh"
+        args:
+        - "-c"
+        - >
+          until nc -z ${CONTACTS_APP_HOST} ${CONTACTS_APP_PORT};
+          do echo "$(date) - Waiting for Contacts App to start..."; sleep 2; done;
+
+      containers:
+      - name: contacts-web
+        image: sgconline/contacts-web:v2.0
+        env:
+        - name: CONTACTS_APP_HOST
+          value: "contacts-app"
+        - name: CONTACTS_APP_PORT
+          value: "8000"
+        volumeMounts:
+        - name: nginx-conf-vol
+          mountPath: /etc/nginx/nginx.conf
+          subPath: nginx.conf   
+      volumes:
+        - name: nginx-conf-vol
+          configMap:
+            name: web-nginx-cm

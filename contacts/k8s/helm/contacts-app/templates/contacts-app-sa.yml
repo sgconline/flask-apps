@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  creationTimestamp: "2025-08-15T06:51:23Z"
+  name: contacts-app-sa
+  namespace: contacts-app
+  resourceVersion: "372259"
+  uid: 931dc95e-ed7a-4efb-93ab-ff2eb73adf04
