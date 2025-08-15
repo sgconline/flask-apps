@@ -3,9 +3,39 @@ kind: Kustomization
 
 resources:
   - ../../base
+  - app/contacts-app-dot-env-cm.yml
 
 namePrefix: qa-
-
+namespace: "qa-contacts-app"
 
 patches:
-  - path: contacts-mdb-adm-svc.yml
+  - path: mdb/contacts-mdb-adm-svc.yml
+  - path: app/contacts-app-dep.yml
+  - path: web/contacts-web-cm.yml
+  - path: web/contacts-web-svc.yml
+  - path: web/contacts-nginx.cm.yml
+  - target:
+      kind: Deployment
+    patch: |-
+      - op: add
+        path: /metadata/namespace
+        value: qa-contacts-app
+  - target:
+      kind: Service
+    patch: |-
+      - op: add
+        path: /metadata/namespace
+        value: qa-contacts-app
+  - target:
+      kind: ConfigMap
+    patch: |-
+      - op: add
+        path: /metadata/namespace
+        value: qa-contacts-app
+  - target:
+      kind: Secret
+    patch: |-
+      - op: add
+        path: /metadata/namespace
+        value: qa-contacts-app
+

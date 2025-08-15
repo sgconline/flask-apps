@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-dot-env-cm
+data:
+  .env: |
+
+    mdb_user = "mdbadmin"
+    mdb_pwd = "mdbadmin"
+    mdb_host = "dev-contacts-mdb"
+    mdb_db = "contacts_db"
+    mdb_collection = "contacts"
+    mdb_port = "27017"
+    mdb_conn_str = "mongodb://${mdb_user}:${mdb_pwd}@${mdb_host}:${mdb_port}"

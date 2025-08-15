@@ -21,6 +21,8 @@ spec:
         component: db
 
     spec:
+      serviceAccount: contacts-app-sa
+      serviceAccountName: contacts-app-sa
       volumes:
         - name: mongodb-schema-sh
           configMap:  

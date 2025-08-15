@@ -21,6 +21,8 @@ spec:
         component: web
 
     spec:
+      serviceAccount: contacts-app-sa
+      serviceAccountName: contacts-app-sa
       initContainers:
       - name: wait-for-contacts-app
         image: busybox:latest

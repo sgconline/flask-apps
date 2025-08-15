@@ -1,0 +1,8 @@
+apiVersion: v1
+data:
+  CONTACTS_APP_HOST: qa-contacts-app
+  CONTACTS_APP_PORT: "8000"
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: contacts-web-cm

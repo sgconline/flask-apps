@@ -21,14 +21,16 @@ spec:
         component: app
 
     spec:
-      serviceAccount: contacts-app-sa
-      serviceAccountName: contacts-app-sa
+      volumes:
+        - name: dot-env-db-config
+          configMap:
+            name: app-dot-env-cm
       initContainers:
       - name: wait-for-mongodb
         image: busybox:latest
         env:
         - name: MONGODB_HOST
-          value: "contacts-mdb"
+          value: "dev-contacts-mdb"
         command: 
         - "/bin/sh"
         args:
@@ -36,9 +38,12 @@ spec:
         - >
           until nc -z ${MONGODB_HOST} 27017;
           do echo "$(date) - Waiting for MongoDB ${MONGODB_HOST}..."; sleep 2; done;
-
-
       containers:
       - name: contacts-app
         image: sgconline/contacts-app:v2.0
+        volumeMounts:
+          - name: dot-env-db-config
+            mountPath: /opt/contacts/.env
+            subPath: .env
+
 
