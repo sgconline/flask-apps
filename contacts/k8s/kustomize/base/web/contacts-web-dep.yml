@@ -4,7 +4,7 @@ kind: Deployment
 metadata:
   name: contacts-web
   labels:
-    app: contacts-web
+    app: contacts-app
     component: web
 
 spec:

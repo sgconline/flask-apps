@@ -3,6 +3,9 @@ apiVersion: v1
 kind: Service
 metadata:
   name: contacts-app
+  labels:
+    app: contacts-app
+    environment: sandbox
 spec:
   type: ClusterIP
   selector: 

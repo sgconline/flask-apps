@@ -9,7 +9,9 @@ namePrefix: dev-
 namespace: "dev-contacts-app"
 
 patches:
+  - path: app/contacts-app-svc.yml
   - path: mdb/contacts-mdb-adm-svc.yml
+  - path: mdb/contacts-mdb-svc.yml
   - path: app/contacts-app-dep.yml
   - path: web/contacts-web-cm.yml
   - path: web/contacts-web-svc.yml
@@ -20,6 +22,18 @@ patches:
       - op: add
         path: /metadata/namespace
         value: dev-contacts-app
+  - target:
+      kind: Deployment
+    patch: |-
+      - op: replace
+        path: /metadata/labels/environment
+        value: dev
+  - target:
+      kind: Deployment
+    patch: |-
+      - op: replace
+        path: /spec/template/metadata/labels/environment
+        value: dev
   - target:
       kind: Service
     patch: |-

@@ -4,7 +4,7 @@ kind: Deployment
 metadata:
   name: contacts-mdb
   labels:
-    app: contacts-mdb
+    app: contacts-app
     component: db
 
 spec:
