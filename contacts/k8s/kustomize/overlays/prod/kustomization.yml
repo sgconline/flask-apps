@@ -10,7 +10,9 @@ namespace: "prod-contacts-app"
 
 patches:
   - path: mdb/contacts-mdb-adm-svc.yml
+  - path: mdb/contacts-mdb-svc.yml
   - path: app/contacts-app-dep.yml
+  - path: app/contacts-app-svc.yml
   - path: web/contacts-web-cm.yml
   - path: web/contacts-web-svc.yml
   - path: web/contacts-nginx.cm.yml
@@ -20,6 +22,18 @@ patches:
       - op: add
         path: /metadata/namespace
         value: prod-contacts-app
+  - target:
+      kind: Deployment
+    patch: |-
+      - op: replace
+        path: /metadata/labels/environment
+        value: prod
+  - target:
+      kind: Deployment
+    patch: |-
+      - op: replace
+        path: /spec/template/metadata/labels/environment
+        value: prod
   - target:
       kind: Service
     patch: |-

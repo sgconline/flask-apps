@@ -6,12 +6,12 @@ metadata:
   labels:
     app: contacts-app
     environment: dev
+    component: svc
 spec:
   type: NodePort
   selector: 
-    app: contacts-web
+    app: contacts-app
     component: web
-    environment: dev
   ports:
   - protocol: TCP
     port: 80
