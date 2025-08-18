@@ -4,20 +4,20 @@ kind: Deployment
 metadata:
   name: contacts-mdb
   labels:
-    app: contacts-mdb
+    app: contacts-app
     component: db
 
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: contacts-mdb
+      app: contacts-app
       component: db
   template:
     metadata:
       name: contacts-mdb
       labels:
-        app: contacts-mdb
+        app: contacts-app
         component: db
 
     spec:

@@ -4,20 +4,20 @@ kind: Deployment
 metadata:
   name: contacts-web
   labels:
-    app: contacts-web
+    app: contacts-app
     component: web
 
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: contacts-web
+      app: contacts-app
       component: web
   template:
     metadata:
       name: contacts-web
       labels:
-        app: contacts-web
+        app: contacts-app
         component: web
 
     spec:

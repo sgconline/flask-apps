@@ -36,8 +36,6 @@ spec:
         - >
           until nc -z ${MONGODB_HOST} 27017;
           do echo "$(date) - Waiting for MongoDB ${MONGODB_HOST}..."; sleep 2; done;
-
-
       containers:
       - name: contacts-app
         image: sgconline/contacts-app:v2.0
