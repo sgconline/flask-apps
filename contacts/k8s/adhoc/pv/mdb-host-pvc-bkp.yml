@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mongodb-pvc
+  namespace: contacts-app
+  resourceVersion: "627844"
+  uid: 460bc02f-2050-4670-b999-f0525b66210d
+spec:
+  accessModes:
+  - ReadWriteMany
+  resources:
+    requests:
+      storage: 2Gi
+  storageClassName: nfs
+  volumeMode: Filesystem
+  volumeName: mongodb-pv
+status:
+  accessModes:
+  - ReadWriteMany
+  capacity:
+    storage: 2Gi

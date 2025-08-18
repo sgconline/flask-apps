@@ -16,6 +16,7 @@ patches:
   - path: web/contacts-web-cm.yml
   - path: web/contacts-web-svc.yml
   - path: web/contacts-nginx.cm.yml
+  - path: web/contacts-web-ingress.yml
   - target:
       kind: Deployment
     patch: |-
